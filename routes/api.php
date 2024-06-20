@@ -30,6 +30,9 @@ Route::controller(UsersController::class)->group(function (){
     Route::get('admins', 'getAdmins');
     Route::get('areaManager', 'getAreaManagers');
     Route::get('businessManager', 'getBusinessManagers');
+    Route::get('role/{id}', 'role');
+    Route::get('area/{id}', 'getArea');
+
 
 });
 
