@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'company_id' => fake()->randomElement($companyIDS),
             'area_id' => $this->faker->unique()->numberBetween(1, 1000000),
             'post_id' => $this->faker->unique()->numberBetween(1, 1000000),
-            'password' => Hash::make('contrasena'), // password
+            'password' => Hash::make('123'), // password
             'remember_token' => Str::random(10),
         ];
     }
