@@ -12,17 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('workers', function (Blueprint $table) {
-            $table->integer('user_id')->unique();
-            $table->integer('company_id');
-            $table->integer('area_id');
-            $table->string('area_name');
+            $table->id()->unique();
             $table->integer('post_id');
             $table->string('post_name');
             $table->string('role');
             $table->string('user_name');
-            $table->string('company_name');
-
-            $table->foreign('company_id')->references('main_company_id')->on('multicompanies')->onDelete('cascade');
+            $table->foreignId('stat_id')->constrained('stats');
+            $table->foreignId('company_id')->constrained('multicompanies');
+            $table->foreignId('area_id')->constrained('areas');
             $table->timestamps();
         });
     }

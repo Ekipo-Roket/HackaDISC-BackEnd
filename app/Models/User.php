@@ -21,7 +21,7 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'user_id',
         'user_name',
-        'role',
+        'role_id',
         'email',
         'password',
         'company_id',
@@ -70,8 +70,16 @@ class User extends Authenticatable implements JWTSubject
 
     public function company()
     {
-        return $this->belongsTo(Multicompany::class, 'company_id', 'main_company_id');
+        return $this->belongsTo(Multicompany::class, 'company_id', 'id');
     }
-    
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class, 'area_id', 'id');
+    }
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id', 'id');
+    }
     
 }

@@ -19,7 +19,7 @@ class StatFactory extends Factory
     protected static $usedWorkerIds = [];
     public function definition(): array
     {
-        $workerID = Worker::pluck('user_id')->toArray();
+        $workerID = Worker::pluck('id')->toArray();
         $availableWorkerIDs = array_diff($workerID, static::$usedWorkerIds);
         $userId = fake()->randomElement($availableWorkerIDs);
         static::$usedWorkerIds[] = $userId;
