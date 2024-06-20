@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\API\Auth\LoginController;
+use App\Http\Controllers\API\User\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,11 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('login', 'login');
     Route::post('logout', 'logout');
     Route::post('refresh', 'refresh');
+});
+
+Route::controller(UsersController::class)->group(function (){
+    Route::get('admins', 'getAdmins');
+    Route::get('areaManager', 'getAreaManagers');
+    Route::get('businessManager', 'getBusinessManagers');
+
 });

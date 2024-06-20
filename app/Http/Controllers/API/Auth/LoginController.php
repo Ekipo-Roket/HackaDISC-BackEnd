@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\API\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    //public function __construct()
-    //{
-    //    $this->middleware('auth:api', ['except' => ['login']]);
-    //}
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['login']]);
+    }
 
     public function login(Request $request)
     {
