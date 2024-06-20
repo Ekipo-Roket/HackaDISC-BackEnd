@@ -5,19 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Multicompany extends Model
+class Area extends Model
 {
     use HasFactory;
 
-    public function users()
-    {
-        return $this->hasMany(User::class, 'company_id', 'id');
-    }
     public function workers()
     {
         return $this->hasMany('App\Models\Worker');
     }
+    public function users()
+    {
+        return $this->hasMany(User::class, 'area_id', 'id');
+    }
 }
-
-
-

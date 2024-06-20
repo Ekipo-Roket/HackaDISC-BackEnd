@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('stats', function (Blueprint $table) {
-            $table->integer('user_id');
-            $table->integer('stat');
-            $table->foreign('user_id')->references('user_id')->on('workers')->onDelete('cascade');
+            $table->id()->unique();
+            $table->string('name_stat');
             $table->timestamps();
         });
     }
