@@ -12,15 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->string('user_id');
+            $table->integer('user_id')->unique();
             $table->string('user_name');
             $table->string('role');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('company_id');
-            $table->string('area_id');
-            $table->string('post_id');
+            $table->integer('company_id');
+            $table->integer('area_id');
+            $table->integer('post_id');
+
+            $table->foreign('company_id')->references('main_company_id')->on('multicompanies')->onDelete('cascade');
             $table->rememberToken();
+            $table->timestamps();
         });
     }
 

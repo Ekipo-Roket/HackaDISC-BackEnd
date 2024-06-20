@@ -17,23 +17,36 @@ class LoginController extends Controller
     public function login(Request $request)
     {
 
-        $credentials = $request->only('email', 'password');
-        $token = Auth::attempt($credentials);
 
-        if (!$token) {
+        try {
+            $request->validate([
+                'email' => 'required',
+                'password' => 'required',
+            ]);
+
+            $credentials = $request->only('email', 'password');
+
+            if (!$token = Auth::attempt($credentials)) {
+                return response()->json([
+                    'message' => 'Unauthorized',
+                ], 401);
+            }
+
+            $user = Auth::user();
             return response()->json([
-                'message' => 'Unauthorized',
-            ], 401);
-        }
+                'user' => $user,
+                'authorization' => [
+                    'token' => $token,
+                    'type' => 'bearer',
+                ]
+            ]);
+        } catch (\Exception $e) {
 
-        $user = Auth::user();
-        return response()->json([
-            'user' => $user,
-            'authorization' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ]
-        ]);
+            return response()->json([
+                'message' => 'Invalid request',
+                'error' => $e->getMessage(),
+            ], 400);
+        }
     }
 
 

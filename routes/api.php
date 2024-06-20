@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ExcelController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Auth\LoginController;
@@ -22,9 +23,11 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('refresh', 'refresh');
 });
 
+
 Route::controller(UsersController::class)->group(function (){
     Route::get('admins', 'getAdmins');
     Route::get('areaManager', 'getAreaManagers');
     Route::get('businessManager', 'getBusinessManagers');
 
 });
+
