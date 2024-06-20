@@ -14,7 +14,7 @@ class WorkersController extends Controller
 
             $workers = Worker::get();
 
-            
+
 
             return response()->json($workers);
         }catch(\Exception $e){
@@ -49,11 +49,11 @@ class WorkersController extends Controller
 
     public function getWorkersByArea($area_id){
         try{
-            //CAMBIAR AREA_NAME POR AREA_ID
-            $workers = Worker::where('area_name', $area_id)->get();
+            $workers = Worker::where('area_id', $area_id)->get();
             foreach ($workers as $worker) {
-                $worker_id  = $worker->user_id;
-                $evaluations = Evaluation::where('user_id', $worker_id)->get();
+                $worker_id  = $worker->id;
+                $evaluations = Evaluation::where('user_id', $worker_id)->orderby('date', 'desc')->get();
+
                 $worker->evaluations = $evaluations;
             }
 

@@ -43,7 +43,19 @@ class DatabaseSeeder extends Seeder
                 'company_id' => $companyId,
             ]);
         }
-        
+
+        $workerIDs = Worker::pluck('id')->toArray();
+        foreach ($workerIDs as $workerID) {
+            Evaluation::factory()->create([
+                'user_id' => $workerID,
+            ]);
+        }
+        $workerIDs = Worker::pluck('id')->toArray();
+        foreach ($workerIDs as $workerID) {
+            Evaluation::factory()->create([
+                'user_id' => $workerID,
+            ]);
+        }
         $workerIDs = Worker::pluck('id')->toArray();
         foreach ($workerIDs as $workerID) {
             Evaluation::factory()->create([
