@@ -41,6 +41,9 @@ Route::controller(WorkersController::class)->group(function (){
     Route::get('worker/company/{id}', 'getWorkersByCompany');
     Route::get('worker/{id}', 'getWorker');
     Route::get('workers/area/{id}', 'getWorkersByArea');
+    Route::post('workers/change-status/in-intervention/{id}', 'statusToInIntervention');
+    Route::post('workers/change-status/intervened/{id}', 'statusToIntervened');
+    Route::post('workers/change-status/evaluated/{id}', 'statusToEvaluated');
 });
 Route::controller(EvaluationsController::class)->group(function (){
     Route::get('evaluations/worker/{id}', 'getEvaluationsByWorker');

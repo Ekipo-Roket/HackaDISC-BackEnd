@@ -64,5 +64,42 @@ class WorkersController extends Controller
             ], 500);
         }
     }
+    public function statusToInIntervention($id){
+        try{
+            $worker = Worker::find($id);
+            $worker->stat_id = 2;
+            $worker->save();
+            return response()->json($worker);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function statusToIntervened($id){
+        try{
+            $worker = Worker::find($id);
+            $worker->stat_id = 3;
+            $worker->save();
+            return response()->json($worker);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function statusToEvaluated($id){
+        try{
+            $worker = Worker::find($id);
+            $worker->stat_id = 1;
+            $worker->save();
+            return response()->json($worker);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
 
 }
