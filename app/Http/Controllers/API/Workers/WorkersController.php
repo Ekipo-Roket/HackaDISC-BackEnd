@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Workers;
+namespace App\Http\Controllers\API\Workers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,7 +13,7 @@ class WorkersController extends Controller
 
             $workers = Worker::get();
 
-            
+
 
             return response()->json($workers);
         }catch(\Exception $e){
