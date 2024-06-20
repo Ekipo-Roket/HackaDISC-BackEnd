@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Workers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Worker;
+use App\Models\Evaluation;
 
 class WorkersController extends Controller
 {
@@ -41,7 +42,14 @@ class WorkersController extends Controller
     }
     public function getWorkersByArea($area_id){
         try{
-            $workers = Worker::where('area_id', $area_id)->get();
+            //CAMBIAR AREA_NAME POR AREA_ID
+            $workers = Worker::where('area_name', $area_id)->get();
+            foreach ($workers as $worker) {
+                $worker_id  = $worker->user_id;
+                $evaluations = Evaluation::where('user_id', $worker_id)->get();
+                $worker->evaluations = $evaluations;
+            }
+
             return response()->json($workers);
         }catch(\Exception $e){
             return response()->json([
