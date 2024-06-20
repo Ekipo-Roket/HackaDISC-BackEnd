@@ -13,15 +13,20 @@ class Worker extends Model
     
     public function company()
     {
-        return $this->belongsTo(Multicompany::class, 'company_id', 'main_company_id');
+        return $this->belongsTo(Multicompany::class, 'company_id', 'id');
     }
-    public function stat()
-    {
-        return $this->hasOne(Stat::class);
-    }
+    
     public function evaluations()
     {
         return $this->hasMany(Evaluation::class);
+    }
+    public function area()
+    {
+        return $this->belongsTo(Area::class, 'area_id', 'id');
+    }
+    public function stat()
+    {
+        return $this->belongsTo(Stat::class, 'stat_id', 'id');
     }
 }
 

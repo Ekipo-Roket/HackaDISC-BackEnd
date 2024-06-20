@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('multicompanies', function (Blueprint $table) {
-            $table->id()->unique();
-            $table->integer('sub_company_id');
-            $table->string('main_company_name');
-            $table->string('sub_company_name');
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+            $table->string('name_rol');
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('multicompanies');
+        Schema::dropIfExists('roles');
     }
 };

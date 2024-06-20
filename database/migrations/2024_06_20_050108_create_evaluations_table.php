@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('evaluations', function (Blueprint $table) {
-            $table->integer('user_id');
+            $table->foreignId('user_id')->constrained('workers');
             $table->float('adaptability_to_change');
             $table->float('safe_conduct');
             $table->float('dynamsim_energy');
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->float('working_under_pressure');
             $table->dateTime('date');
 
-            $table->foreign('user_id')->references('user_id')->on('workers')->onDelete('cascade');
+           
             $table->timestamps();
         });
     }
