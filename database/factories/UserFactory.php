@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Multicompany;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -17,11 +19,16 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $companyIDS = Multicompany::pluck('main_company_id')->toArray();
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'user_id' => $this->faker->unique()->numberBetween(1, 1000000),
+            'user_name' => $this->faker->name,
+            'role' => $this->faker->randomElement(['Jefe', 'Gerente', 'Administrador']),
+            'email' => $this->faker->unique()->safeEmail,
+            'company_id' => fake()->randomElement($companyIDS),
+            'area_id' => $this->faker->unique()->numberBetween(1, 1000000),
+            'post_id' => $this->faker->unique()->numberBetween(1, 1000000),
+            'password' => Hash::make('contrasena'), // password
             'remember_token' => Str::random(10),
         ];
     }

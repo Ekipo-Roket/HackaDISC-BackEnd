@@ -67,4 +67,11 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function company()
+    {
+        return $this->belongsTo(Multicompany::class, 'company_id', 'main_company_id');
+    }
+    
+    
 }
