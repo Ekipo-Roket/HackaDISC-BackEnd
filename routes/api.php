@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\User\UsersController;
+use App\Http\Controllers\API\Workers\WorkersController;
+use App\Http\Controllers\API\Evaluation\EvaluationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,23 @@ Route::controller(UsersController::class)->group(function (){
     Route::get('admins', 'getAdmins');
     Route::get('areaManager', 'getAreaManagers');
     Route::get('businessManager', 'getBusinessManagers');
+    Route::get('role/{id}', 'role');
+    Route::get('area/{id}', 'getArea');
+
 
 });
+
+Route::controller(WorkersController::class)->group(function (){
+    Route::get('workers', 'getWorkers');
+    Route::get('worker/company/{id}', 'getWorkersByCompany');
+    Route::get('worker/{id}', 'getWorker');
+    Route::get('workers/area/{id}', 'getWorkersByArea');
+    Route::post('workers/change-status/in-intervention/{id}', 'statusToInIntervention');
+    Route::post('workers/change-status/intervened/{id}', 'statusToIntervened');
+    Route::post('workers/change-status/evaluated/{id}', 'statusToEvaluated');
+});
+Route::controller(EvaluationsController::class)->group(function (){
+    Route::get('evaluations/worker/{id}', 'getEvaluationsByWorker');
+});
+
 

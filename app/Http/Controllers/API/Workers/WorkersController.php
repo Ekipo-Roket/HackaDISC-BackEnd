@@ -5,10 +5,11 @@ namespace App\Http\Controllers\API\Workers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Worker;
+use App\Models\Evaluation;
 
 class WorkersController extends Controller
 {
-    public function getAllWorkers(){
+    public function getWorkers(){
         try{
 
             $workers = Worker::get();
@@ -49,6 +50,13 @@ class WorkersController extends Controller
     public function getWorkersByArea($area_id){
         try{
             $workers = Worker::where('area_id', $area_id)->get();
+            foreach ($workers as $worker) {
+                $worker_id  = $worker->id;
+                $evaluations = Evaluation::where('user_id', $worker_id)->orderby('date', 'desc')->get();
+
+                $worker->evaluations = $evaluations;
+            }
+
             return response()->json($workers);
         }catch(\Exception $e){
             return response()->json([
@@ -56,5 +64,42 @@ class WorkersController extends Controller
             ], 500);
         }
     }
+    public function statusToInIntervention($id){
+        try{
+            $worker = Worker::find($id);
+            $worker->stat_id = 2;
+            $worker->save();
+            return response()->json($worker);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function statusToIntervened($id){
+        try{
+            $worker = Worker::find($id);
+            $worker->stat_id = 3;
+            $worker->save();
+            return response()->json($worker);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function statusToEvaluated($id){
+        try{
+            $worker = Worker::find($id);
+            $worker->stat_id = 1;
+            $worker->save();
+            return response()->json($worker);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
 
 }
