@@ -6,15 +6,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Worker;
 use App\Models\Evaluation;
+use App\Models\Multicompany;
 
 class WorkersController extends Controller
 {
     public function getWorkers(){
         try{
 
-            $workers = Worker::get();
+            $workers = Worker::all();
 
+            foreach ($workers as $worker) {
+                $company_id  = $worker->company_id;
+                $company = Multicompany::find($company_id);
+                $worker->company_name = $company->main_company_name;
+                $worker->subcompany_name = $company->sub_company_name;
 
+            }
 
             return response()->json($workers);
         }catch(\Exception $e){
@@ -64,5 +71,44 @@ class WorkersController extends Controller
             ], 500);
         }
     }
+
+    public function statusToInIntervention($id){
+        try{
+            $worker = Worker::find($id);
+            $worker->stat_id = 2;
+            $worker->save();
+            return response()->json($worker);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function statusToIntervened($id){
+        try{
+            $worker = Worker::find($id);
+            $worker->stat_id = 3;
+            $worker->save();
+            return response()->json($worker);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function statusToEvaluated($id){
+        try{
+            $worker = Worker::find($id);
+            $worker->stat_id = 1;
+            $worker->save();
+            return response()->json($worker);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+
 
 }

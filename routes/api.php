@@ -7,7 +7,7 @@ use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\User\UsersController;
 use App\Http\Controllers\API\Workers\WorkersController;
 use App\Http\Controllers\API\Evaluation\EvaluationsController;
-
+use App\Http\Controllers\API\Multicompany\MulticompaniesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,7 +32,10 @@ Route::controller(UsersController::class)->group(function (){
     Route::get('businessManager', 'getBusinessManagers');
     Route::get('role/{id}', 'role');
     Route::get('area/{id}', 'getArea');
-    Route::get('stats', 'getStats');
+    Route::get('stats', 'getStats');    Route::get('role/{id}', 'role');
+    Route::get('area/{id}', 'getArea');
+
+
 });
 
 Route::controller(WorkersController::class)->group(function (){
@@ -40,9 +43,17 @@ Route::controller(WorkersController::class)->group(function (){
     Route::get('worker/company/{id}', 'getWorkersByCompany');
     Route::get('worker/{id}', 'getWorker');
     Route::get('workers/area/{id}', 'getWorkersByArea');
+    Route::post('workers/change-status/in-intervention/{id}', 'statusToInIntervention');
+    Route::post('workers/change-status/intervened/{id}', 'statusToIntervened');
+    Route::post('workers/change-status/evaluated/{id}', 'statusToEvaluated');
 });
 Route::controller(EvaluationsController::class)->group(function (){
     Route::get('evaluations/worker/{id}', 'getEvaluationsByWorker');
+});
+
+Route::controller(MulticompaniesController::class)->group(function (){
+    Route::get('multicompanies', 'getMulticompanies');
+    Route::get('multicompany/{id}', 'getMulticompany');
 });
 
 
