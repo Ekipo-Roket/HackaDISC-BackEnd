@@ -6,16 +6,21 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Worker;
 use App\Models\Evaluation;
+use App\Models\Multicompany;
 
 class WorkersController extends Controller
 {
     public function getWorkers(){
         try{
+            $workers = Worker::all();
 
-            $workers = Worker::get();
+            foreach ($workers as $worker) {
+                $company_id  = $worker->company_id;
+                $company = Multicompany::find($company_id);
+                $worker->company_name = $company->main_company_name;
+                $worker->subcompany_name = $company->sub_company_name;
 
-
-
+            }
             return response()->json($workers);
         }catch(\Exception $e){
             return response()->json([

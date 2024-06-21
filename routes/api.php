@@ -7,7 +7,7 @@ use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\User\UsersController;
 use App\Http\Controllers\API\Workers\WorkersController;
 use App\Http\Controllers\API\Evaluation\EvaluationsController;
-
+use App\Http\Controllers\API\Multicompany\MulticompaniesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -47,6 +47,11 @@ Route::controller(WorkersController::class)->group(function (){
 });
 Route::controller(EvaluationsController::class)->group(function (){
     Route::get('evaluations/worker/{id}', 'getEvaluationsByWorker');
+});
+
+Route::controller(MulticompaniesController::class)->group(function (){
+    Route::get('multicompanies', 'getMulticompanies');
+    Route::get('multicompany/{id}', 'getMulticompany');
 });
 
 
