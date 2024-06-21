@@ -12,6 +12,7 @@ class WorkersController extends Controller
 {
     public function getWorkers(){
         try{
+
             $workers = Worker::all();
 
             foreach ($workers as $worker) {
@@ -21,6 +22,7 @@ class WorkersController extends Controller
                 $worker->subcompany_name = $company->sub_company_name;
 
             }
+
             return response()->json($workers);
         }catch(\Exception $e){
             return response()->json([
@@ -69,6 +71,7 @@ class WorkersController extends Controller
             ], 500);
         }
     }
+
     public function statusToInIntervention($id){
         try{
             $worker = Worker::find($id);
@@ -105,6 +108,7 @@ class WorkersController extends Controller
             ], 500);
         }
     }
+
 
 
 }
