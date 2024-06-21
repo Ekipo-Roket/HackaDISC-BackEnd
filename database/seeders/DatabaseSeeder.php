@@ -4,12 +4,15 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Area;
 use App\Models\Evaluation;
 use App\Models\Multicompany;
 use App\Models\Stat;
 use App\Models\User;
 use App\Models\Worker;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,12 +21,47 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(StatSeeder::class);
+        $this->call(RoleSeeder::class);
+        Area::factory()->count(5)->create();
+        Multicompany::factory()->count(20)->create();
+        $companyIds = Multicompany::pluck('id')->toArray();
+        foreach ($companyIds as $companyId) {
+            User::factory()->create([
+                'company_id' => $companyId,
+            ]);
+        }
+        $companyIds = Multicompany::pluck('id')->toArray();
+        foreach ($companyIds as $companyId) {
+            Worker::factory()->create([
+                'company_id' => $companyId,
+            ]);
+        }
+        $companyIds = Multicompany::pluck('id')->toArray();
+        foreach ($companyIds as $companyId) {
+            Worker::factory()->create([
+                'company_id' => $companyId,
+            ]);
+        }
 
-        Multicompany::factory()->count(30)->create();
-        User::factory()->count(4)->create();
-        Worker::factory()->count(20)->create();
-        Stat::factory()->count(19)->create();
-        Evaluation::factory()->count(20)->create();
+        $workerIDs = Worker::pluck('id')->toArray();
+        foreach ($workerIDs as $workerID) {
+            Evaluation::factory()->create([
+                'user_id' => $workerID,
+            ]);
+        }
+        $workerIDs = Worker::pluck('id')->toArray();
+        foreach ($workerIDs as $workerID) {
+            Evaluation::factory()->create([
+                'user_id' => $workerID,
+            ]);
+        }
+        $workerIDs = Worker::pluck('id')->toArray();
+        foreach ($workerIDs as $workerID) {
+            Evaluation::factory()->create([
+                'user_id' => $workerID,
+            ]);
+        }
 
     }
 }

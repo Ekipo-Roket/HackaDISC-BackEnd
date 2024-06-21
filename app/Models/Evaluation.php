@@ -11,6 +11,6 @@ class Evaluation extends Model
 
     public function worker()
     {
-        return $this->belongsTo(Worker::class, 'user_id', 'user_id');
+        return $this->belongsTo(Worker::class, 'user_id', 'id');
     }
 }

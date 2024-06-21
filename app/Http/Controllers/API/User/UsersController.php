@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Area;
+use App\Models\Role;
 
 class UsersController extends Controller
 {
@@ -27,5 +29,22 @@ class UsersController extends Controller
     {
         $businessManagers = User::where('role', 'Gerente')->get();
         return response()->json([$businessManagers]);
+    }
+    public function role($id){
+        try{
+            $role = Role::find($id);
+            return response()->json([$role],200);
+        }catch(\Exception $e){
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function getArea($id){
+        try{
+            $area = Area::find($id);
+            return response()->json([$area]);
+        }catch(\Exception $e){
+            return response()->json(['error' => $e->getMessage()]);
+        }
     }
 }

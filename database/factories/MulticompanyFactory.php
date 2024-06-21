@@ -17,7 +17,6 @@ class MulticompanyFactory extends Factory
     public function definition(): array
     {
         return [
-            'main_company_id' => $this->faker->unique()->numberBetween(1, 1000000),
             'sub_company_id' =>  $this->faker->unique()->numberBetween(1, 1000000),
             'main_company_name' => $this->faker->company,
             'sub_company_name' => $this->faker->company,
