@@ -54,9 +54,9 @@ class WorkersController extends Controller
         }
     }
 
-    public function getWorkersByArea($area_id){
+    public function getWorkersByArea($area_id,$company_id){
         try{
-            $workers = Worker::where('area_id', $area_id)->get();
+            $workers = Worker::where('area_id', $area_id)->where('company_id',$company_id)->get();
             foreach ($workers as $worker) {
                 $worker_id  = $worker->id;
                 $evaluations = Evaluation::where('user_id', $worker_id)->orderby('date', 'desc')->get();
