@@ -5,7 +5,9 @@ namespace App\Http\Controllers\API\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use App\Models\Role;
+use App\Models\Area;
+use App\Models\Stat;
 class UsersController extends Controller
 {
     public function getAdmins()
@@ -18,6 +20,34 @@ class UsersController extends Controller
         }
 
     }
+
+    public function role($id){
+        try{
+            $role = Role::find($id);
+            return response()->json([$role],200);
+        }catch(\Exception $e){
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function getArea($id){
+        try{
+            $area = Area::find($id);
+            return response()->json([$area]);
+        }catch(\Exception $e){
+            return response()->json(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function getStats(){
+        try{
+            $stats = Stat::get();
+            return response()->json([$stats]);
+        }catch(\Exception $e){
+            return response()->json(['error' => $e->getMessage()]);
+        }
+    }
+
     public function getAreaManagers()
     {
         $areaManagers = User::where('role', 'Jefe')->get();
