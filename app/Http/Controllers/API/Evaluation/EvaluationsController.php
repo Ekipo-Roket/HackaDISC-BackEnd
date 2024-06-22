@@ -11,11 +11,11 @@ class EvaluationsController extends Controller
     public function getEvaluationsByWorker($worker_id){
         try{
             $evaluations = Evaluation::where('user_id', $worker_id)->get();
-
+            
             return response()->json($evaluations);
         }catch(\Exception $e){
             return response()->json([
-                'message' => $e->getMessage(),s
+                'message' => $e->getMessage(),
             ], 500);
         }
     }
