@@ -12,10 +12,12 @@ use App\Models\Role;
 use App\Models\Stat;
 use App\Models\User;
 use App\Models\Worker;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Faker\Factory as Faker;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -42,13 +44,17 @@ class DatabaseSeeder extends Seeder
             ]);
             if($roleID == 1)
             {
+
                 for ($i=0; $i < 4; $i++) { 
+
                     Worker::factory()->create([
                         'company_id' => $companyId,
                         'area_id' => $areaID,
                         'stat_id' => $faker->randomElement($statIDS),
                     ]);
+
                 } 
+
             }
         }
         $companyIds = Multicompany::pluck('id')->toArray();

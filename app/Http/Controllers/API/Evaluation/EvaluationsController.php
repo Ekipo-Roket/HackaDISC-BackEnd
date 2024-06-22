@@ -19,4 +19,5 @@ class EvaluationsController extends Controller
             ], 500);
         }
     }
+
 }
