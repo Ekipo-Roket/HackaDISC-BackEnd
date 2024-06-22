@@ -6,7 +6,9 @@ namespace Database\Seeders;
 
 use App\Models\Area;
 use App\Models\Evaluation;
+use App\Models\Intervention;
 use App\Models\Multicompany;
+use App\Models\Role;
 use App\Models\Stat;
 use App\Models\User;
 use App\Models\Worker;
@@ -42,13 +44,17 @@ class DatabaseSeeder extends Seeder
             ]);
             if($roleID == 1)
             {
-                for ($i=0; $i < 4; $i++) {
+
+                for ($i=0; $i < 4; $i++) { 
+
                     Worker::factory()->create([
                         'company_id' => $companyId,
                         'area_id' => $areaID,
                         'stat_id' => $faker->randomElement($statIDS),
                     ]);
-                }
+
+                } 
+
             }
         }
         $companyIds = Multicompany::pluck('id')->toArray();
@@ -79,6 +85,18 @@ class DatabaseSeeder extends Seeder
         $workerIDs = Worker::pluck('id')->toArray();
         foreach ($workerIDs as $workerID) {
             Evaluation::factory()->create([
+                'user_id' => $workerID,
+            ]);
+        }
+        $workerIDs = Worker::pluck('id')->toArray();
+        foreach ($workerIDs as $workerID) {
+            Intervention::factory()->create([
+                'user_id' => $workerID,
+            ]);
+        }
+        $workerIDs = Worker::pluck('id')->toArray();
+        foreach ($workerIDs as $workerID) {
+            Intervention::factory()->create([
                 'user_id' => $workerID,
             ]);
         }

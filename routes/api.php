@@ -40,7 +40,7 @@ Route::controller(UsersController::class)->group(function (){
 });
 
 Route::controller(WorkersController::class)->group(function (){
-    Route::get('workers', 'getWorkers');
+    Route::get('workers', 'getEvaluationWorkers');
     Route::get('worker/company/{id}', 'getWorkersByCompany');
     Route::get('worker/{id}', 'getWorker');
     Route::get('workers/area/{id}/{company_id}', 'getWorkersByArea');

@@ -8,10 +8,14 @@ use App\Models\Worker;
 use App\Models\Evaluation;
 use App\Models\Multicompany;
 
+use Illuminate\Support\Facades\DB;
+
+
 class WorkersController extends Controller
 {
-    public function getWorkers(){
+    public function getEvaluationWorkers(){
         try{
+
 
             $workers = Worker::all();
 
