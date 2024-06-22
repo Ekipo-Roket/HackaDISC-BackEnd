@@ -12,7 +12,6 @@ use App\Models\Role;
 use App\Models\Stat;
 use App\Models\User;
 use App\Models\Worker;
-use App\Models\Role;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -45,7 +44,7 @@ class DatabaseSeeder extends Seeder
             if($roleID == 1)
             {
 
-                for ($i=0; $i < 4; $i++) { 
+                for ($i=0; $i < 4; $i++) {
 
                     Worker::factory()->create([
                         'company_id' => $companyId,
@@ -53,7 +52,7 @@ class DatabaseSeeder extends Seeder
                         'stat_id' => $faker->randomElement($statIDS),
                     ]);
 
-                } 
+                }
 
             }
         }
