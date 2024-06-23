@@ -28,8 +28,11 @@ Route::controller(LoginController::class)->group(function () {
 
 Route::controller(UsersController::class)->group(function (){
     Route::get('admins', 'getAdmins');
-    Route::get('areaManager', 'getAreaManagers');
+    Route::post('areaManager/{id}', 'getAreaManagers');
     Route::get('businessManager', 'getBusinessManagers');
+    Route::get('role/{id}', 'role');
+    Route::get('area/{id}', 'getArea');
+    Route::get('stats', 'getStats');
     Route::get('role/{id}', 'role');
     Route::get('area/{id}', 'getArea');
 
@@ -37,10 +40,10 @@ Route::controller(UsersController::class)->group(function (){
 });
 
 Route::controller(WorkersController::class)->group(function (){
-    Route::get('workers', 'getWorkers');
+    Route::get('workers', 'getEvaluationWorkers');
     Route::get('worker/company/{id}', 'getWorkersByCompany');
     Route::get('worker/{id}', 'getWorker');
-    Route::get('workers/area/{id}', 'getWorkersByArea');
+    Route::get('workers/area/{id}/{company_id}', 'getWorkersByArea');
     Route::post('workers/change-status/in-intervention/{id}', 'statusToInIntervention');
     Route::post('workers/change-status/intervened/{id}', 'statusToIntervened');
     Route::post('workers/change-status/evaluated/{id}', 'statusToEvaluated');
@@ -52,6 +55,7 @@ Route::controller(EvaluationsController::class)->group(function (){
 Route::controller(MulticompaniesController::class)->group(function (){
     Route::get('multicompanies', 'getMulticompanies');
     Route::get('multicompany/{id}', 'getMulticompany');
+    Route::get('company/stats/{id}', 'getCompanyStats');
 });
 
 
